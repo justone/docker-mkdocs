@@ -19,6 +19,4 @@ fi
 addgroup --gid $MKDOCS_GID $MKDOCS_USER &> /dev/null
 adduser --uid $MKDOCS_UID --gid $MKDOCS_GID $MKDOCS_USER --home $MKDOCS_HOME --no-create-home --disabled-password --gecos '' &> /dev/null
 
-cd $MKDOCS_HOME
-
-mkdocs build
+su - $MKDOCS_USER -c "cd $MKDOCS_HOME; mkdocs build"
