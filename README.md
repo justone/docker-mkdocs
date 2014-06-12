@@ -21,11 +21,28 @@ $ docker build --rm -t mkdocs .
 
 ## Running
 
-To build a site, run the image like this.  The image will build whatever site
-is in `/mkdocs`.
+This docker container can be run in one of two ways.
+
+### Using volumes:
+
+The image will build whatever site is mounted in `/mkdocs`.
 
 ```
 $ docker run --rm -i -t -v /host/path:/mkdocs mkdocs
+```
+
+### Without volumes:
+
+When the `STREAM` environment variable is set, this image expects a tgz on stdin with the root of the mkdocs compatible source. The built site is output as a tarball to stdout:
+
+```
+$ tar -czf - . | docker run -i -e STREAM=1 --rm mkdocs > output.tgz
+```
+
+To replicate the 'with volumes' version without volumes, pipe to a tar command:
+
+```
+$ tar -czf - . | docker run -i -e STREAM=1 --rm mkdocs | tar -xzf -
 ```
 
 # License
