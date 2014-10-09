@@ -16,7 +16,7 @@ $ docker pull nate/mkdocs
 
 ```
 $ git clone https://github.com/justone/docker-mkdocs
-$ docker build --rm -t mkdocs .
+$ docker build --rm -t nate/mkdocs .
 ```
 
 ## Running
@@ -28,7 +28,7 @@ This docker container can be run in one of two ways.
 The image will build whatever site is mounted in `/mkdocs`.
 
 ```
-$ docker run --rm -i -t -v /host/path:/mkdocs mkdocs
+$ docker run --rm -i -t -v /host/path:/mkdocs nate/mkdocs
 ```
 
 ### Without volumes:
@@ -36,13 +36,13 @@ $ docker run --rm -i -t -v /host/path:/mkdocs mkdocs
 When the `STREAM` environment variable is set, this image expects a tgz on stdin with the root of the mkdocs compatible source. The built site is output as a tarball to stdout:
 
 ```
-$ tar -czf - . | docker run -i -e STREAM=1 --rm mkdocs > output.tgz
+$ tar -czf - . | docker run -i -e STREAM=1 --rm nate/mkdocs > output.tgz
 ```
 
 To replicate the 'with volumes' version without volumes, pipe to a tar command:
 
 ```
-$ tar -czf - . | docker run -i -e STREAM=1 --rm mkdocs | tar -xzf -
+$ tar -czf - . | docker run -i -e STREAM=1 --rm nate/mkdocs | tar -xzf -
 ```
 
 # License
